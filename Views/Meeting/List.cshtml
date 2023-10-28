@@ -1,0 +1,45 @@
+﻿@model List<UserInfo>
+@{
+    ViewBag.Title = "Meeting Participation List";
+}
+<main class="text-center">
+    <h1 class="h4">Meeting Participation List</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>Name Surname</td>
+                <td>Participation Status</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+
+            @{ int i = 0; }
+
+            @foreach(var user in Model)
+            {
+                var status = user.WillAttend == true ? "Yes" : "No";
+                var className = user.WillAttend == true ? "table-success" : "table-danger";
+
+                if(user.WillAttend == true)
+                {
+                    i++;
+                }
+
+                <tr class="@className">
+                    <td>@user.Name</td>
+                    <td>@status</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" href="/Meeting/Details/@user.Id">Detail</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="card">
+        <div class="card-body">
+            <span>Number of participants: @i</span>
+        </div>
+    </div>
+</main>
